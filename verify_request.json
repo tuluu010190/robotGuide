@@ -1,0 +1,17 @@
+{
+  "signature": "${signature}",
+  "req_transaction_id": "${transaction_req_id}",
+  "customer_ref": "9010108822",
+  "partner_name": "TMX",
+  "billcode": "KTC",
+  "sof": "EW",
+  "channel": "TMXMASS",
+  "pay_type": "02",
+  "amount": "10.00",
+  "payment_date": "22/08/2017 18:04:25",
+  "ref1": "5407169458012961",
+  "ref2": "",
+  "branch_id": "1234",
+  "ewallet_account": "9010108822",
+  "ewallet_pin": "gpftXyPNQYPnRygYAA/xGr9DpFzihyhiJcbTVgVbUR4="
+}

@@ -1,0 +1,5 @@
+{
+	name: "Lavirtia",
+	lastname: "Kle",
+	friends : ['${name}','Bob','Eve']
+}

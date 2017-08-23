@@ -1,0 +1,19 @@
+{
+	"signature":"${confirm_signature}",
+	"req_transaction_id":"${confirm_request_transaction_id}",
+	"customer_ref":"9010108822",
+	"partner_name":"TMX",
+	"billcode":"KTC",
+	"sof":"EW",
+	"channel":"TMXMASS",
+	"pay_type":"02",
+	"amount":"10.00",
+	"ref1":"5407169458012961",
+	"ref2":"",
+	"branch_id":"1234",
+	"payment_transaction_id":"17012518042558950122",
+	"payment_datetime":"25/01/2017 18:04:26",
+	"ewallet_account":"9010108822",
+	"ewallet_pin":"gpftXyPNQYPnRygYAA/xGr9DpFzihyhiJcbTVgVbUR4="
+}
+
