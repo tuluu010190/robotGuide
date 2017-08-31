@@ -113,4 +113,92 @@ TC4_POST Request Json
         # verify that status code response is 200
      should be equal as integers     ${confirm_resp.status_code}      200
 
+
+TC05_Get Basic
+    create session  github  https://api.github.com
+    ${resp}     get request     github     /users/bulkan
+    should be equal as integers     ${resp.status_code}     200
+    log many  ${resp.json()}
+    dictionary should contain value  ${resp.json()}    Australia, Melbourne
+    ${resp_json}    set variable  ${resp.json()}
+    ${location_value}   set variable  ${resp_json['location']}
+    log  ${location_value}
+    should be equal  ${location_value}  Australia, Melbourne
+
+
+TC06_Get with Url Parameters
+    create session  httpbin     http://httpbin.org
+    ${params}   create dictionary   key=value      key2=value2
+    ${resp}     get request  httpbin    /get    params=${params}
+    should be equal as integers  ${resp.status_code}    200
+    log  ${resp.content}
+    should be equal  ${resp.json()['args']}    ${params}
+
+TC07_Get with Json parameters
+    create session     httpbin      http://httpbin.org
+    ${data}     create dictionary  latitude=30.496346  longitude=-87.640356
+    ${resp}     get request  httpbin    /get    json=${data}
+    should be equal as integers  ${resp.status_code}    200
+    log  ${resp.content}
+
+TC08_Get with httpsGet and verify cert
+    create session  https   https://httpbin.org     verify=true
+    ${resp}     get request  https  /
+    should be equal as strings  ${resp.status_code}    200
+    log  ${resp.content}
+
+TC09_Get with httpsGet and verify cert and CA bundle
+    create session  CAbundle    https://httpbin.org     verify=${CURDIR}${/}cacert.pem
+    ${resp}     get request  CAbundle   /get
+
+TC10_Get with Authentication
+    ${auth}     create list     user    passwd
+    create session  http    https://httpbin.org     auth=${auth}
+    ${resp}     get request    http     /basic-auth/user/passwd
+    should be equal as strings      ${resp.status_code}     200
+    log  ${resp.content}
+    ${authentication}     set variable     ${resp.json()['authenticated']}
+    log  ${authentication}
+    should be equal as strings  ${authentication}   True
+
+
+TC11_Get with Digest Authentication
+    ${auth}     create list     user    pass
+    create digest session  dist_authen     https://httpbin.org     auth=${auth}    debug=3
+    ${resp}     get request     dist_authen     /digest-auth/auth/user/pass
+    should be equal as strings  ${resp.status_code}     200
+    log  ${resp.content}
+
+TC11_Post with params
+    ${param}    create dictionary  key=value333    key2=value23333
+    create session  http    http://httpbin.org
+    ${option_resp}   options request    http     /
+    log     ${option_resp.content}
+    ${resp}     post request  http   /post   params=${param}
+    should be equal as strings      ${resp.status_code}     200
+    log  ${resp.content}
+
+TC12_Put request no data
+    create session  http    http://httpbin.org
+    ${resp}     put request     http   /put
+    should be equal as strings    ${resp.status_code}     200
+    log to console  ${resp.content}
+
+
+TC13_Post request with data
+    ${data}     set variable  some data
+    create session  http    http://httpbin.org
+    ${resp}     post request     http   /post   data=${data}
+    should be equal as strings  ${resp.status_code}     200
+
+TC14_Options Request With Redirection
+    [Tags]  options
+    Create Session  httpbin  http://httpbin.org
+    ${resp}=  Options Request  httpbin  /redirect/1
+    Should Be Equal As Strings  ${resp.status_code}  200
+    log     ${resp.content}
+    ${resp}=  Options Request  httpbin  /redirect/1  allow_redirects=${true}
+    Should Be Equal As Strings  ${resp.status_code}  200
+    log     ${resp.content}
+
 *** Keywords ***

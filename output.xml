@@ -1,356 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generated="20170823 15:25:03.306" generator="Robot 3.0 (Python 2.7.13 on darwin)">
-<suite source="/Users/ascend/Documents/PycharmProjects/TestRequest/Requests.robot" id="s1" name="Requests">
-<test id="s1-t1" name="TC4_POST Request Json">
-<kw name="Create Session" library="RequestsLibrary">
-<doc>Create Session: create a HTTP session to a server</doc>
+<robot generated="20170830 18:08:51.668" generator="Robot 3.0 (Python 2.7.13 on darwin)">
+<suite source="/Users/ascend/Documents/PycharmProjects/RobotGuide/DB.robot" id="s1" name="DB">
+<test id="s1-t1" name="TC06_Connect to Oracle DB Using DatabaseLibrary:">
+<kw name="Connect To Database Using Custom Params" library="DatabaseLibrary">
+<doc>Loads the DB API 2.0 module given `dbapiModuleName` then uses it to</doc>
 <arguments>
-<arg>bpay</arg>
-<arg>https://10.224.100.36/billpays/biller/v1/payment/verify</arg>
+<arg>cx_Oracle</arg>
+<arg>'root','root','localhost:3306/noti'</arg>
 </arguments>
-<msg timestamp="20170823 15:25:03.423" level="INFO">Creating Session using : alias=bpay, url=https://10.224.100.36/billpays/biller/v1/payment/verify, headers={},                     cookies=None, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
-<status status="PASS" endtime="20170823 15:25:03.431" starttime="20170823 15:25:03.423"></status>
+<msg timestamp="20170830 18:08:51.780" level="INFO">Executing : Connect To Database Using Custom Params : cx_Oracle.connect(db_api_2.connect('root','root','localhost:3306/noti')) </msg>
+<msg timestamp="20170830 18:08:51.786" level="FAIL">DatabaseError: DPI-1047: 64-bit Oracle Client library cannot be loaded: "dlopen(libclntsh.dylib, 1): image not found". See https://oracle.github.io/odpi/doc/installation.html#macos for help</msg>
+<status status="FAIL" endtime="20170830 18:08:51.786" starttime="20170830 18:08:51.779"></status>
 </kw>
-<kw name="Get File" library="OperatingSystem">
-<doc>Returns the contents of a specified file.</doc>
-<arguments>
-<arg>verify_request.json</arg>
-</arguments>
-<assign>
-<var>${verify_rqs_body_txt}</var>
-</assign>
-<msg timestamp="20170823 15:25:03.431" html="yes" level="INFO">Getting file '&lt;a href="file:///Users/ascend/Documents/PycharmProjects/TestRequest/verify_request.json"&gt;/Users/ascend/Documents/PycharmProjects/TestRequest/verify_request.json&lt;/a&gt;'.</msg>
-<msg timestamp="20170823 15:25:03.432" level="INFO">${verify_rqs_body_txt} = {
-  "signature": "${signature}",
-  "req_transaction_id": "${transaction_req_id}",
-  "customer_ref": "9010108822",
-  "partner_name": "TMX",
-  "billcode": "KTC",
-  "sof": "EW",
-  "channel": "TMXMASS",
- ...</msg>
-<status status="PASS" endtime="20170823 15:25:03.432" starttime="20170823 15:25:03.431"></status>
-</kw>
-<kw name="Get Current Date" library="DateTime">
-<doc>Returns current local or UTC time with an optional increment.</doc>
-<assign>
-<var>${transaction_req_id}</var>
-</assign>
-<msg timestamp="20170823 15:25:03.432" level="INFO">${transaction_req_id} = 2017-08-23 15:25:03.432</msg>
-<status status="PASS" endtime="20170823 15:25:03.433" starttime="20170823 15:25:03.432"></status>
-</kw>
-<kw name="Log" library="BuiltIn">
-<doc>Logs the given message with the given level.</doc>
-<arguments>
-<arg>${transaction_req_id}</arg>
-</arguments>
-<msg timestamp="20170823 15:25:03.433" level="INFO">2017-08-23 15:25:03.432</msg>
-<status status="PASS" endtime="20170823 15:25:03.433" starttime="20170823 15:25:03.433"></status>
-</kw>
-<kw name="Encode Hex SHA256" library="StringKeyword">
-<arguments>
-<arg>8FKN4S27466C7R0U</arg>
-<arg>TMX10.005407169458012961${transaction_req_id}</arg>
-</arguments>
-<assign>
-<var>${signature}</var>
-</assign>
-<msg timestamp="20170823 15:25:03.434" level="INFO">${signature} = d6eb86d229469446a2f94f56677ca0b2968364b609875b33c58b1186c90dae77</msg>
-<status status="PASS" endtime="20170823 15:25:03.434" starttime="20170823 15:25:03.433"></status>
-</kw>
-<kw name="Log" library="BuiltIn">
-<doc>Logs the given message with the given level.</doc>
-<arguments>
-<arg>${signature}</arg>
-</arguments>
-<msg timestamp="20170823 15:25:03.434" level="INFO">d6eb86d229469446a2f94f56677ca0b2968364b609875b33c58b1186c90dae77</msg>
-<status status="PASS" endtime="20170823 15:25:03.434" starttime="20170823 15:25:03.434"></status>
-</kw>
-<kw name="Replace Variables" library="BuiltIn">
-<doc>Replaces variables in the given text with their current values.</doc>
-<arguments>
-<arg>${verify_rqs_body_txt}</arg>
-</arguments>
-<assign>
-<var>${verify_rqs_body_txt}</var>
-</assign>
-<msg timestamp="20170823 15:25:03.435" level="INFO">${verify_rqs_body_txt} = {
-  "signature": "d6eb86d229469446a2f94f56677ca0b2968364b609875b33c58b1186c90dae77",
-  "req_transaction_id": "2017-08-23 15:25:03.432",
-  "customer_ref": "9010108822",
-  "partner_name": "TMX",
-  "bill...</msg>
-<status status="PASS" endtime="20170823 15:25:03.435" starttime="20170823 15:25:03.435"></status>
-</kw>
-<kw name="Log" library="BuiltIn">
-<doc>Logs the given message with the given level.</doc>
-<arguments>
-<arg>${verify_rqs_body_txt}</arg>
-</arguments>
-<msg timestamp="20170823 15:25:03.436" level="INFO">{
-  "signature": "d6eb86d229469446a2f94f56677ca0b2968364b609875b33c58b1186c90dae77",
-  "req_transaction_id": "2017-08-23 15:25:03.432",
-  "customer_ref": "9010108822",
-  "partner_name": "TMX",
-  "billcode": "KTC",
-  "sof": "EW",
-  "channel": "TMXMASS",
-  "pay_type": "02",
-  "amount": "10.00",
-  "payment_date": "22/08/2017 18:04:25",
-  "ref1": "5407169458012961",
-  "ref2": "",
-  "branch_id": "1234",
-  "ewallet_account": "9010108822",
-  "ewallet_pin": "gpftXyPNQYPnRygYAA/xGr9DpFzihyhiJcbTVgVbUR4="
-}</msg>
-<status status="PASS" endtime="20170823 15:25:03.436" starttime="20170823 15:25:03.435"></status>
-</kw>
-<kw name="Get File" library="OperatingSystem">
-<doc>Returns the contents of a specified file.</doc>
-<arguments>
-<arg>verify_request_header.json</arg>
-</arguments>
-<assign>
-<var>${verify_rqs_header_txt}</var>
-</assign>
-<msg timestamp="20170823 15:25:03.436" html="yes" level="INFO">Getting file '&lt;a href="file:///Users/ascend/Documents/PycharmProjects/TestRequest/verify_request_header.json"&gt;/Users/ascend/Documents/PycharmProjects/TestRequest/verify_request_header.json&lt;/a&gt;'.</msg>
-<msg timestamp="20170823 15:25:03.437" level="INFO">${verify_rqs_header_txt} = {
-  "partner_id": "TMX",
-  "secret": "ada25d3d416aaedf892b766eabc416afacbf0f03200c6fab4b3287e69dfd1d62"
-}</msg>
-<status status="PASS" endtime="20170823 15:25:03.437" starttime="20170823 15:25:03.436"></status>
-</kw>
-<kw name="To Json" library="RequestsLibrary">
-<doc>Convert a string to a JSON object</doc>
-<arguments>
-<arg>${verify_rqs_header_txt}</arg>
-</arguments>
-<assign>
-<var>${verify_rqs_header_json}</var>
-</assign>
-<msg timestamp="20170823 15:25:03.437" level="INFO">To JSON using : content={
-  "partner_id": "TMX",
-  "secret": "ada25d3d416aaedf892b766eabc416afacbf0f03200c6fab4b3287e69dfd1d62"
-} </msg>
-<msg timestamp="20170823 15:25:03.437" level="INFO">To JSON using : pretty_print=False </msg>
-<msg timestamp="20170823 15:25:03.437" level="INFO">${verify_rqs_header_json} = {u'secret': u'ada25d3d416aaedf892b766eabc416afacbf0f03200c6fab4b3287e69dfd1d62', u'partner_id': u'TMX'}</msg>
-<status status="PASS" endtime="20170823 15:25:03.437" starttime="20170823 15:25:03.437"></status>
-</kw>
-<kw name="Log" library="BuiltIn">
-<doc>Logs the given message with the given level.</doc>
-<arguments>
-<arg>${verify_rqs_header_json}</arg>
-</arguments>
-<msg timestamp="20170823 15:25:03.438" level="INFO">{u'secret': u'ada25d3d416aaedf892b766eabc416afacbf0f03200c6fab4b3287e69dfd1d62', u'partner_id': u'TMX'}</msg>
-<status status="PASS" endtime="20170823 15:25:03.438" starttime="20170823 15:25:03.438"></status>
-</kw>
-<kw name="Post Request" library="RequestsLibrary">
-<doc>Send a POST request on the session object found using the</doc>
-<arguments>
-<arg>bpay</arg>
-<arg>${EMPTY}</arg>
-<arg>data=${verify_rqs_body_txt}</arg>
-<arg>headers=${verify_rqs_header_json}</arg>
-</arguments>
-<assign>
-<var>${verify_rqs_resp}</var>
-</assign>
-<msg timestamp="20170823 15:25:03.456" level="INFO">Starting new HTTPS connection (1): 10.224.100.36</msg>
-<msg timestamp="20170823 15:25:04.427" level="INFO">Post Request using : alias=bpay, uri=, data=&lt;empty&gt;, headers={u'secret': u'ada25d3d416aaedf892b766eabc416afacbf0f03200c6fab4b3287e69dfd1d62', u'partner_id': u'TMX'}, files=None, allow_redirects=True </msg>
-<msg timestamp="20170823 15:25:04.428" level="INFO">/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/requests/packages/urllib3/connectionpool.py:768: InsecureRequestWarning: Unverified HTTPS request is being made. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.org/en/latest/security.html
-  InsecureRequestWarning)</msg>
-<msg timestamp="20170823 15:25:04.428" level="INFO">${verify_rqs_resp} = &lt;Response [200]&gt;</msg>
-<status status="PASS" endtime="20170823 15:25:04.428" starttime="20170823 15:25:03.438"></status>
-</kw>
-<kw name="Log" library="BuiltIn">
-<doc>Logs the given message with the given level.</doc>
-<arguments>
-<arg>${verify_rqs_resp.text}</arg>
-</arguments>
-<msg timestamp="20170823 15:25:04.429" level="INFO">{"transaction_id":"17082315250388790124","namespace":"BPAY","response_code":"0","user_message_en":"SUCCESS","user_message_th":"สำเร็จ","developer_message":"SUCCESS","commission":"8.00"}</msg>
-<status status="PASS" endtime="20170823 15:25:04.429" starttime="20170823 15:25:04.428"></status>
-</kw>
-<kw name="Set Variable" library="BuiltIn">
-<doc>Returns the given values which can then be assigned to a variables.</doc>
-<arguments>
-<arg>${verify_rqs_resp.json()}</arg>
-</arguments>
-<assign>
-<var>${verify_rqs_resp_json}</var>
-</assign>
-<msg timestamp="20170823 15:25:04.431" level="INFO">${verify_rqs_resp_json} = {u'user_message_th': u'\u0e2a\u0e33\u0e40\u0e23\u0e47\u0e08', u'response_code': u'0', u'namespace': u'BPAY', u'commission': u'8.00', u'user_message_en': u'SUCCESS', u'developer_message': u'SUCCESS', u...</msg>
-<status status="PASS" endtime="20170823 15:25:04.431" starttime="20170823 15:25:04.430"></status>
-</kw>
-<kw name="Log" library="BuiltIn">
-<doc>Logs the given message with the given level.</doc>
-<arguments>
-<arg>${verify_rqs_resp_json}</arg>
-</arguments>
-<msg timestamp="20170823 15:25:04.431" level="INFO">{u'user_message_th': u'\u0e2a\u0e33\u0e40\u0e23\u0e47\u0e08', u'response_code': u'0', u'namespace': u'BPAY', u'commission': u'8.00', u'user_message_en': u'SUCCESS', u'developer_message': u'SUCCESS', u'transaction_id': u'17082315250388790124'}</msg>
-<status status="PASS" endtime="20170823 15:25:04.431" starttime="20170823 15:25:04.431"></status>
-</kw>
-<kw name="Set Variable" library="BuiltIn">
-<doc>Returns the given values which can then be assigned to a variables.</doc>
-<arguments>
-<arg>${verify_rqs_resp_json['transaction_id']}</arg>
-</arguments>
-<assign>
-<var>${transaction_id}</var>
-</assign>
-<msg timestamp="20170823 15:25:04.432" level="INFO">${transaction_id} = 17082315250388790124</msg>
-<status status="PASS" endtime="20170823 15:25:04.432" starttime="20170823 15:25:04.432"></status>
-</kw>
-<kw name="Log" library="BuiltIn">
-<doc>Logs the given message with the given level.</doc>
-<arguments>
-<arg>${transaction_id}</arg>
-</arguments>
-<msg timestamp="20170823 15:25:04.433" level="INFO">17082315250388790124</msg>
-<status status="PASS" endtime="20170823 15:25:04.433" starttime="20170823 15:25:04.433"></status>
-</kw>
-<kw name="Create Session" library="RequestsLibrary">
-<doc>Create Session: create a HTTP session to a server</doc>
-<arguments>
-<arg>bpay_confirm</arg>
-<arg>https://10.224.100.36/billpays/biller/v1/payment/confirm</arg>
-</arguments>
-<msg timestamp="20170823 15:25:04.433" level="INFO">Creating Session using : alias=bpay_confirm, url=https://10.224.100.36/billpays/biller/v1/payment/confirm, headers={},                     cookies=None, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
-<status status="PASS" endtime="20170823 15:25:04.434" starttime="20170823 15:25:04.433"></status>
-</kw>
-<kw name="Get File" library="OperatingSystem">
-<doc>Returns the contents of a specified file.</doc>
-<arguments>
-<arg>confirm_req.json</arg>
-</arguments>
-<assign>
-<var>${confirm_rqs_body_txt}</var>
-</assign>
-<msg timestamp="20170823 15:25:04.434" html="yes" level="INFO">Getting file '&lt;a href="file:///Users/ascend/Documents/PycharmProjects/TestRequest/confirm_req.json"&gt;/Users/ascend/Documents/PycharmProjects/TestRequest/confirm_req.json&lt;/a&gt;'.</msg>
-<msg timestamp="20170823 15:25:04.435" level="INFO">${confirm_rqs_body_txt} = {
-	"signature":"${confirm_signature}",
-	"req_transaction_id":"${confirm_request_transaction_id}",
-	"customer_ref":"9010108822",
-	"partner_name":"TMX",
-	"billcode":"KTC",
-	"sof":"EW",
-	"channel":"TMXMA...</msg>
-<status status="PASS" endtime="20170823 15:25:04.435" starttime="20170823 15:25:04.434"></status>
-</kw>
-<kw name="Get Current Date" library="DateTime">
-<doc>Returns current local or UTC time with an optional increment.</doc>
-<assign>
-<var>${confirm_request_transaction_id}</var>
-</assign>
-<msg timestamp="20170823 15:25:04.435" level="INFO">${confirm_request_transaction_id} = 2017-08-23 15:25:04.435</msg>
-<status status="PASS" endtime="20170823 15:25:04.435" starttime="20170823 15:25:04.435"></status>
-</kw>
-<kw name="Set Variable" library="BuiltIn">
-<doc>Returns the given values which can then be assigned to a variables.</doc>
-<arguments>
-<arg>TMX10.005407169458012961${confirm_request_transaction_id}${transaction_id}</arg>
-</arguments>
-<assign>
-<var>${confirm_signature}</var>
-</assign>
-<msg timestamp="20170823 15:25:04.436" level="INFO">${confirm_signature} = TMX10.0054071694580129612017-08-23 15:25:04.43517082315250388790124</msg>
-<status status="PASS" endtime="20170823 15:25:04.436" starttime="20170823 15:25:04.436"></status>
-</kw>
-<kw name="Log" library="BuiltIn">
-<doc>Logs the given message with the given level.</doc>
-<arguments>
-<arg>${confirm_signature}</arg>
-</arguments>
-<msg timestamp="20170823 15:25:04.437" level="INFO">TMX10.0054071694580129612017-08-23 15:25:04.43517082315250388790124</msg>
-<status status="PASS" endtime="20170823 15:25:04.437" starttime="20170823 15:25:04.436"></status>
-</kw>
-<kw name="Replace Variables" library="BuiltIn">
-<doc>Replaces variables in the given text with their current values.</doc>
-<arguments>
-<arg>${confirm_rqs_body_txt}</arg>
-</arguments>
-<assign>
-<var>${confirm_rqs_body_txt}</var>
-</assign>
-<msg timestamp="20170823 15:25:04.438" level="INFO">${confirm_rqs_body_txt} = {
-	"signature":"TMX10.0054071694580129612017-08-23 15:25:04.43517082315250388790124",
-	"req_transaction_id":"2017-08-23 15:25:04.435",
-	"customer_ref":"9010108822",
-	"partner_name":"TMX",
-	"billcode":...</msg>
-<status status="PASS" endtime="20170823 15:25:04.438" starttime="20170823 15:25:04.437"></status>
-</kw>
-<kw name="Log" library="BuiltIn">
-<doc>Logs the given message with the given level.</doc>
-<arguments>
-<arg>${confirm_rqs_body_txt}</arg>
-</arguments>
-<msg timestamp="20170823 15:25:04.438" level="INFO">{
-	"signature":"TMX10.0054071694580129612017-08-23 15:25:04.43517082315250388790124",
-	"req_transaction_id":"2017-08-23 15:25:04.435",
-	"customer_ref":"9010108822",
-	"partner_name":"TMX",
-	"billcode":"KTC",
-	"sof":"EW",
-	"channel":"TMXMASS",
-	"pay_type":"02",
-	"amount":"10.00",
-	"ref1":"5407169458012961",
-	"ref2":"",
-	"branch_id":"1234",
-	"payment_transaction_id":"17012518042558950122",
-	"payment_datetime":"25/01/2017 18:04:26",
-	"ewallet_account":"9010108822",
-	"ewallet_pin":"gpftXyPNQYPnRygYAA/xGr9DpFzihyhiJcbTVgVbUR4="
-}
-
-</msg>
-<status status="PASS" endtime="20170823 15:25:04.438" starttime="20170823 15:25:04.438"></status>
-</kw>
-<kw name="Post Request" library="RequestsLibrary">
-<doc>Send a POST request on the session object found using the</doc>
-<arguments>
-<arg>bpay_confirm</arg>
-<arg>${EMPTY}</arg>
-<arg>data=${confirm_rqs_body_txt}</arg>
-<arg>headers=${verify_rqs_header_json}</arg>
-</arguments>
-<assign>
-<var>${confirm_resp}</var>
-</assign>
-<msg timestamp="20170823 15:25:04.441" level="INFO">Starting new HTTPS connection (1): 10.224.100.36</msg>
-<msg timestamp="20170823 15:25:05.266" level="INFO">Post Request using : alias=bpay_confirm, uri=, data=&lt;empty&gt;, headers={u'secret': u'ada25d3d416aaedf892b766eabc416afacbf0f03200c6fab4b3287e69dfd1d62', u'partner_id': u'TMX'}, files=None, allow_redirects=True </msg>
-<msg timestamp="20170823 15:25:05.266" level="INFO">/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/requests/packages/urllib3/connectionpool.py:768: InsecureRequestWarning: Unverified HTTPS request is being made. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.org/en/latest/security.html
-  InsecureRequestWarning)</msg>
-<msg timestamp="20170823 15:25:05.266" level="INFO">${confirm_resp} = &lt;Response [200]&gt;</msg>
-<status status="PASS" endtime="20170823 15:25:05.266" starttime="20170823 15:25:04.439"></status>
-</kw>
-<kw name="Should Be Equal As Integers" library="BuiltIn">
-<doc>Fails if objects are unequal after converting them to integers.</doc>
-<arguments>
-<arg>${confirm_resp.status_code}</arg>
-<arg>200</arg>
-</arguments>
-<msg timestamp="20170823 15:25:05.268" level="INFO">Argument types are:
-&lt;type 'int'&gt;
-&lt;type 'unicode'&gt;</msg>
-<status status="PASS" endtime="20170823 15:25:05.268" starttime="20170823 15:25:05.267"></status>
-</kw>
-<status status="PASS" endtime="20170823 15:25:05.268" critical="yes" starttime="20170823 15:25:03.422"></status>
+<status status="FAIL" endtime="20170830 18:08:51.787" critical="yes" starttime="20170830 18:08:51.778">DatabaseError: DPI-1047: 64-bit Oracle Client library cannot be loaded: "dlopen(libclntsh.dylib, 1): image not found". See https://oracle.github.io/odpi/doc/installation.html#macos for help</status>
 </test>
-<status status="PASS" endtime="20170823 15:25:05.269" starttime="20170823 15:25:03.309"></status>
+<status status="FAIL" endtime="20170830 18:08:51.788" starttime="20170830 18:08:51.672"></status>
 </suite>
 <statistics>
 <total>
-<stat fail="0" pass="1">Critical Tests</stat>
-<stat fail="0" pass="1">All Tests</stat>
+<stat fail="1" pass="0">Critical Tests</stat>
+<stat fail="1" pass="0">All Tests</stat>
 </total>
 <tag>
 </tag>
 <suite>
-<stat fail="0" id="s1" name="Requests" pass="1">Requests</stat>
+<stat fail="1" id="s1" name="DB" pass="0">DB</stat>
 </suite>
 </statistics>
 <errors>
+<msg timestamp="20170830 18:08:51.753" level="ERROR">Error in file '/Users/ascend/Documents/PycharmProjects/RobotGuide/DB.robot': Importing test library 'AWSSQSLibraryKeywords' failed: ImportError: No module named AWSSQSLibraryKeywords
+Traceback (most recent call last):
+  None
+PYTHONPATH:
+  /Library/Frameworks/Python.framework/Versions/2.7/bin
+  /usr/local/lib/wxPython-unicode-2.8.12.1/lib/python2.7/site-packages
+  /usr/local/lib/wxPython-unicode-2.8.12.1/lib/python2.7/site-packages/wx-2.8-mac-unicode
+  /Library/Frameworks/Python.framework/Versions/2.7/lib/python27.zip
+  /Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7
+  /Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/plat-darwin
+  /Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/plat-mac
+  /Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/plat-mac/lib-scriptpackages
+  /Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/lib-tk
+  /Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/lib-old
+  /Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/lib-dynload
+  /Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages
+  /usr/local/lib/wxPython-unicode-2.8.12.1/lib/python2.7</msg>
 </errors>
 </robot>
